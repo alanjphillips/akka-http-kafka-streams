@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+
+  akkahttpkafkaapp:
+    image: akka-http-kafka-streams:1.0
