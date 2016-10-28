@@ -10,13 +10,13 @@ import io.circe.generic.auto._
 
 case class Sent(details: String)
 
-class Routes {
+class Routes (producer: KafkaProducer) {
 
   val workerRoutes = {
     path("service" / "work") {
       post {
         entity(as[SomethingToDo]) { somethingToDo =>
-          val sent: Future[Sent] = Future.successful(Sent(somethingToDo.name)) // sendToKafka(somethingToDo)
+          val sent: Future[Sent] = producer.sendToKafka(somethingToDo.name)
           onComplete(sent) {
             case Success(s) => complete(s.details)
             case Failure(f) => complete(BadRequest -> "Failed")
@@ -29,5 +29,5 @@ class Routes {
 }
 
 object Routes {
-  def apply(): Routes = new Routes()
+  def apply(producer: KafkaProducer): Routes = new Routes(producer)
 }

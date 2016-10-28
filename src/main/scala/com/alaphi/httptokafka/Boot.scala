@@ -15,7 +15,9 @@ object Boot extends App {
 
   val config = ConfigFactory.load()
 
-  val routes = Routes().workerRoutes
+  val producer = KafkaProducer(system, materializer, executionContext)
+
+  val routes = Routes(producer).workerRoutes
 
   val bindingFuture = Http().bindAndHandle(routes, "0.0.0.0", 8081)
 
