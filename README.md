@@ -13,7 +13,7 @@ akka-http-kafka-streams> sbt clean docker:publishLocal
 
 3) Run docker compose to launch
 
-ClusterShardedApp> docker-compose up
+akka-http-kafka-streams> docker-compose up
 
 4) Use rest client such as Postman to send http request:
 Uri: http://192.168.99.100:8081/service/work
