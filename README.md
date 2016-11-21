@@ -6,6 +6,7 @@ Install docker, docker-machine and docker-compose
 1) Connect to 'default' machine, see docker docs on how to create machine in virtualbox
 
 akka-http-kafka-streams> docker-machine start default
+
 akka-http-kafka-streams> eval "$(docker-machine env default)"
 
 2) CD into project and use SBT to build and publish to local Docker repo:
